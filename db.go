@@ -772,11 +772,6 @@ func (db *DB) MultiGetWithTS(opts *ReadOptions, keys ...[]byte) (Slices, Slices,
 // Note that all the keys passed to this API are restricted to a single
 // column family.
 func (db *DB) BatchedMultiGetCF(opts *ReadOptions, cf *ColumnFamilyHandle, sortedInput bool, keys ...[]byte) (PinnableSlices, error) {
-	cfs := make(ColumnFamilyHandles, len(keys))
-	for i := 0; i < len(keys); i++ {
-		cfs[i] = cf
-	}
-
 	cKeys, cKeySizes := byteSlicesToCSlices(keys)
 
 	vals := make(pinnableSliceSlice, len(keys))
